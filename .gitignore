@@ -1,0 +1,50 @@
+# ==============================
+# Sistema operativo
+# ==============================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ==============================
+# Editores / IDEs
+# ==============================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+# Archivos temporales
+# ==============================
+
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.log
+
+# Archivos temporales de Office
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# ==============================
+# Logisim Evolution
+# ==============================
+
+# Archivos de respaldo/temporales
+*.circ~
+*.circ.bak
