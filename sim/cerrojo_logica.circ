@@ -93,10 +93,17 @@
       <a name="appearance" val="NewPins"/>
       <a name="label" val="P8"/>
     </comp>
-    <comp lib="6" loc="(850,250)" name="LED"/>
-    <comp lib="6" loc="(850,520)" name="LED"/>
+    <comp lib="6" loc="(1030,150)" name="LED"/>
+    <comp lib="6" loc="(1030,190)" name="LED"/>
+    <comp loc="(1010,160)" name="Latch_SR"/>
     <comp loc="(740,250)" name="Decodificador_Abrir"/>
     <comp loc="(740,520)" name="Decodificador_Cerrar"/>
+    <wire from="(1010,160)" to="(1020,160)"/>
+    <wire from="(1010,180)" to="(1020,180)"/>
+    <wire from="(1020,150)" to="(1020,160)"/>
+    <wire from="(1020,150)" to="(1030,150)"/>
+    <wire from="(1020,180)" to="(1020,190)"/>
+    <wire from="(1020,190)" to="(1030,190)"/>
     <wire from="(290,250)" to="(330,250)"/>
     <wire from="(290,280)" to="(350,280)"/>
     <wire from="(290,310)" to="(370,310)"/>
@@ -141,8 +148,12 @@
     <wire from="(490,410)" to="(520,410)"/>
     <wire from="(490,490)" to="(490,680)"/>
     <wire from="(490,680)" to="(520,680)"/>
-    <wire from="(740,250)" to="(850,250)"/>
-    <wire from="(740,520)" to="(850,520)"/>
+    <wire from="(740,250)" to="(750,250)"/>
+    <wire from="(740,520)" to="(760,520)"/>
+    <wire from="(750,160)" to="(750,250)"/>
+    <wire from="(750,160)" to="(790,160)"/>
+    <wire from="(760,180)" to="(760,520)"/>
+    <wire from="(760,180)" to="(790,180)"/>
   </circuit>
   <circuit name="Decodificador_Abrir">
     <a name="appearance" val="logisim_evolution"/>
@@ -346,5 +357,53 @@
     <wire from="(490,450)" to="(500,450)"/>
     <wire from="(500,60)" to="(500,450)"/>
     <wire from="(500,60)" to="(510,60)"/>
+  </circuit>
+  <circuit name="Latch_SR">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="Latch_SR"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(410,160)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="Abrir"/>
+    </comp>
+    <comp lib="0" loc="(410,290)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="Cerrar"/>
+    </comp>
+    <comp lib="0" loc="(630,180)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="AbrirLatch"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="0" loc="(630,270)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="CerrarLatch"/>
+      <a name="type" val="output"/>
+    </comp>
+    <comp lib="1" loc="(520,180)" name="NOR Gate"/>
+    <comp lib="1" loc="(520,270)" name="NOR Gate"/>
+    <wire from="(410,160)" to="(460,160)"/>
+    <wire from="(410,290)" to="(460,290)"/>
+    <wire from="(430,200)" to="(430,230)"/>
+    <wire from="(430,200)" to="(460,200)"/>
+    <wire from="(430,230)" to="(530,230)"/>
+    <wire from="(440,220)" to="(440,250)"/>
+    <wire from="(440,220)" to="(530,220)"/>
+    <wire from="(440,250)" to="(460,250)"/>
+    <wire from="(520,180)" to="(530,180)"/>
+    <wire from="(520,270)" to="(530,270)"/>
+    <wire from="(530,180)" to="(530,220)"/>
+    <wire from="(530,180)" to="(610,180)"/>
+    <wire from="(530,230)" to="(530,270)"/>
+    <wire from="(530,270)" to="(570,270)"/>
+    <wire from="(570,190)" to="(570,270)"/>
+    <wire from="(570,190)" to="(620,190)"/>
+    <wire from="(610,180)" to="(610,270)"/>
+    <wire from="(610,270)" to="(630,270)"/>
+    <wire from="(620,180)" to="(620,190)"/>
+    <wire from="(620,180)" to="(630,180)"/>
   </circuit>
 </project>
