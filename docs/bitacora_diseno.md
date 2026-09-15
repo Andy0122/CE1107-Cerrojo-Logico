@@ -81,3 +81,51 @@ Esta deducción matemática reduce el costo de implementación del módulo a:
 - 1 compuerta NOT (para el segmento $d$).
 - 3 compuertas OR de 2 entradas (para los segmentos $g$ y $a$).
 - Conexión directa a $V_{DD}$ para $e$ y $f$.
+
+
+## Sesión 4: Optimización Booleana y Arquitectura NOR-AND sin Inversores 
+
+### 1. Motivación y Análisis de Redundancia Posicional
+La síntesis canónica de la Sesión 1 requería dos redes disjuntas de 9 entradas con compuertas AND inexistentes en la familia TTL comercial y un exceso de 11 inversores discretos.
+
+Al comparar bit a bit el vector de Apertura ($413_5 = 011001100_2$) y el de Cierre ($142_5 = 010100001_2$):
+
+| Variable | $P_8$ | $P_7$ | $P_6$ | $P_5$ | $P_4$ | $P_3$ | $P_2$ | $P_1$ | $P_0$ |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Abrir** | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 |
+| **Cerrar** | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 |
+| **Coincidencia** | **0** | **1** | $\neq$ | $\neq$ | **0** | $\neq$ | $\neq$ | **0** | $\neq$ |
+
+Se identificaron cuatro literales comunes idénticos:
+$$COMUN = \overline{P_8} \cdot \overline{P_4} \cdot \overline{P_1} \cdot P_7$$
+
+Aplicando el **Teorema de De Morgan** a las tres variables negadas:
+$$COMUN = \overline{(P_8 + P_4 + P_1)} \cdot P_7$$
+Sintetizado físicamente con **1 compuerta NOR de 3 entradas** y **1 compuerta AND de 2 entradas**.
+
+---
+
+### 2. Eliminación Total de Inversores mediante Topología NOR-AND
+Para evitar el uso de compuertas NOT en los literales restantes de cada clave, se aplicó sistemáticamente el principio de De Morgan ($\overline{X} \cdot \overline{Y} = \overline{X+Y}$), dividiendo la evaluación de cada clave en dos sub-bloques balanceados:
+
+#### A. Rama de Apertura (`Abrir`):
+- **Ceros restantes ($P_5, P_0$):** Se agrupan directamente en una compuerta NOR de 2 entradas:
+  $$\text{NOR}_{abrir} = \overline{P_5 + P_0} = \overline{P_5} \cdot \overline{P_0}$$
+- **Unos restantes ($P_6, P_3, P_2$):** Se agrupan en una compuerta AND de 3 entradas:
+  $$\text{AND}_{abrir} = P_6 \cdot P_3 \cdot P_2$$
+- **Etapa de Coincidencia Final:** Una compuerta AND multiplica las tres etapas:
+  $$Abrir = COMUN \cdot \text{NOR}_{abrir} \cdot \text{AND}_{abrir}$$
+
+#### B. Rama de Cierre (`Cerrar`):
+- **Ceros restantes ($P_6, P_3, P_2$):** Se agrupan directamente en una compuerta NOR de 3 entradas:
+  $$\text{NOR}_{cerrar} = \overline{P_6 + P_3 + P_2} = \overline{P_6} \cdot \overline{P_3} \cdot \overline{P_2}$$
+- **Unos restantes ($P_5, P_0$):** Se agrupan en una compuerta AND de 2 entradas:
+  $$\text{AND}_{cerrar} = P_5 \cdot P_0$$
+- **Etapa de Coincidencia Final:** Una compuerta AND multiplica las tres etapas:
+  $$Cerrar = COMUN \cdot \text{NOR}_{cerrar} \cdot \text{AND}_{cerrar}$$
+
+---
+
+### 3. Balance de Recursos y Ventajas de Implementación
+1. **Cero inversores requeridos:** Se eliminaron los 11 chips NOT que exigía la forma canónica, reduciendo el ruido de conmutación y el enrutamiento en protoboard.
+2. **Compatibilidad TTL directa:** El circuito se implementa en su totalidad con compuertas estándar de bajo conteo de entradas:
