@@ -129,3 +129,12 @@ Para evitar el uso de compuertas NOT en los literales restantes de cada clave, s
 ### 3. Balance de Recursos y Ventajas de Implementación
 1. **Cero inversores requeridos:** Se eliminaron los 11 chips NOT que exigía la forma canónica, reduciendo el ruido de conmutación y el enrutamiento en protoboard.
 2. **Compatibilidad TTL directa:** El circuito se implementa en su totalidad con compuertas estándar de bajo conteo de entradas:
+
+## Sesión 5: Evaluación Experimental y Validación en Laboratorio 
+### 1. Protocolo de Pruebas en Protoboard
+Se implementó y evaluó el circuito en protoboard utilizando componentes de la familia TTL estándar:
+- **Verificación de Claves:** Se validaron físicamente las contraseñas $413_5$ (Apertura) y $142_5$ (Cierre). Se corroboró el rechazo absoluto frente a vectores nulos (`000000000`), vectores saturados (`111111111`) y errores de 1 bit (distancia de Hamming = 1).
+- **Memoria Latch SR:** Se comprobó la retención de estado tras retirar la excitación y la ausencia de estados indeterminados.
+- **Display de 7 Segmentos:** Comprobación física de los caracteres `L`, `A`, `C` y `E` gobernados por la señal de control `Listo`.
+
+El informe formal y las evidencias de laboratorio quedaron consolidados en el documento adjunto `docs/Bitacora_Taller_Semana5.pdf`.
